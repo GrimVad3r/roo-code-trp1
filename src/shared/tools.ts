@@ -80,6 +80,7 @@ export const toolParamNames = [
 	// read_file legacy format parameter (backward compatibility)
 	"files",
 	"line_ranges",
+	"intent_id",
 ] as const
 
 export type ToolParamName = (typeof toolParamNames)[number]
@@ -115,6 +116,7 @@ export type NativeToolArgs = {
 	update_todo_list: { todos: string }
 	use_mcp_tool: { server_name: string; tool_name: string; arguments?: Record<string, unknown> }
 	write_to_file: { path: string; content: string }
+	select_active_intent: { intent_id: string; intent_context?: string }
 	// Add more tools as they are migrated to native protocol
 }
 
@@ -289,6 +291,7 @@ export const TOOL_DISPLAY_NAMES: Record<ToolName, string> = {
 	skill: "load skill",
 	generate_image: "generate images",
 	custom_tool: "use custom tools",
+	select_active_intent: "select an active intent from the orchestration plan", // Add this line,
 } as const
 
 // Define available tool groups.
@@ -318,6 +321,7 @@ export const ALWAYS_AVAILABLE_TOOLS: ToolName[] = [
 	"attempt_completion",
 	"switch_mode",
 	"new_task",
+	"select_active_intent",
 	"update_todo_list",
 	"run_slash_command",
 	"skill",
